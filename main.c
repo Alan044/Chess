@@ -80,9 +80,16 @@ void populate_rooks(board_t *board)
     rook->name_of_piece = "R";
     rook->points = 5;
     board->array[0][0]->piece = rook;
+    board->array[0][0]->status = true;
+
     board->array[0][7]->piece = rook; 
-    board->array[7][7]->piece = rook; 
+    board->array[0][7]->status = true;
+
+    board->array[7][7]->piece = rook;
+    board->array[7][7]->status = true;
+
     board->array[7][0]->piece = rook;
+    board->array[7][0]->status = true;
 
 }
 void populate_horse(board_t *board)
@@ -92,9 +99,16 @@ void populate_horse(board_t *board)
     horse->name_of_piece = "H";
     horse->points = 3;
     board->array[0][1]->piece = horse;
-    board->array[0][6]->piece = horse; 
-    board->array[7][6]->piece = horse; 
+    board->array[0][1]->status = true;
+
+    board->array[0][6]->piece = horse;
+    board->array[0][6]->status = true;
+
+    board->array[7][6]->piece = horse;
+    board->array[7][6]->status = true;
+
     board->array[7][1]->piece = horse;
+    board->array[7][1]->status = true;
     
 }
 void populate_bishop(board_t *board)
@@ -104,9 +118,16 @@ void populate_bishop(board_t *board)
     bishop->name_of_piece = "B";
     bishop->points = 3;
     board->array[0][2]->piece = bishop;
-    board->array[0][5]->piece = bishop; 
-    board->array[7][5]->piece = bishop; 
+    board->array[0][2]->status = true;
+
+    board->array[0][5]->piece = bishop;
+    board->array[0][5]->status = true;
+
+    board->array[7][5]->piece = bishop;
+    board->array[7][5]->status = true;
+
     board->array[7][2]->piece = bishop;
+    board->array[7][2]->status = true;
 }
 
 void populate_kings_and_queens(board_t *board)
@@ -116,13 +137,17 @@ void populate_kings_and_queens(board_t *board)
     Queen->name_of_piece = "Q";
     Queen->points = 9;
     board->array[0][3]->piece = Queen; 
-    board->array[7][3]->piece = Queen;
+    board->array[0][3]->status = true; 
+    board->array[7][3]->piece = Queen; 
+    board->array[7][3]->status = true;
     pieces_t* King = calloc(1, sizeof(pieces_t));
     King->name_of_piece = calloc(1, sizeof(char*));
     King->name_of_piece = "K";
     King->points = 0;
     board->array[0][4]->piece = King; 
+    board->array[0][4]->status = true; 
     board->array[7][4]->piece = King;
+    board->array[7][4]->status = true;
 
 }
 void populate_with_starting_pos(board_t *board)
@@ -150,7 +175,7 @@ void print_board(board_t* board)
             printf("  ");
             // printf("%c%d", board->array[i][j]->id->first, board->array[i][j]->id->second);
             if (board->array[i][j]->piece) {
-                printf("%d", board->array[i][j]->piece->points);
+                printf("%d", board->array[i][j]->status);
                 continue;
             }
             printf("X");
