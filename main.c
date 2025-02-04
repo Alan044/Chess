@@ -236,9 +236,18 @@ board_t* create_board()
 }
 void print_board(board_t* board)
 {   
+    char* array_of_id = "ABCDEFGH";
+
+    printf("  ");
+    int k = 0;
+    while (k < strlen(array_of_id)) {
+        printf("   %c   ", array_of_id[k]);
+        k++;
+    }
     for (int i = 0; i < EIGHT; i++) {
-        printf("\n");        
-        for (int j = 0; j < EIGHT; j++) {
+        printf("\n");
+        printf("%d", EIGHT- i);
+        for (int j = 0; j < EIGHT; j++) {        
             printf("  ");
             // printf("%c%d", board->array[i][j]->id->first, board->array[i][j]->id->second);
             if (board->array[i][j]->status) {
