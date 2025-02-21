@@ -107,14 +107,67 @@ void check(board_t* board, move_t* move)
 {
 
 }
+void user_input(move_t* to_move)
+{
+    char* piece_from = calloc(1, sizeof(char*));
+    do {
+        printf("Enter the piece you want to move: ");
+        scanf("%s", piece_from);
+        to_move->from->first = piece_from[0];
+        to_move->from->second = piece_from[1] -'0';        
+    } while (strlen(piece_from) != 2); {
+        printf("Invalid position\n");
+    }
+    
+    char* piece_to = calloc(1, sizeof(char*));
+    do {
+        printf("Enter the position you want to move to: ");
+        scanf("%s", piece_to);
+        to_move->to->first = piece_to[0];
+        to_move->to->second = piece_to[1] - '0';
+        
+    } while (strcmp(piece_from, piece_to) == 0); 
+
+    free(piece_from);
+    free(piece_to);
+}
+
+pos_t* lookup(id_of_board_t* move, board_t* board)
+{
+    pos_t* pos = calloc(1, sizeof(pos_t));
+    for (int i = 0; i < EIGHT; i++) {
+        if (board->array[i][0]->id->first == move->first) {
+            pos->i = i;
+            
+        }
+        for (int j = 0; j < EIGHT; j++) {
+            if (board->array[0][j]->id->second == move->second) {
+                pos->j = j;
+                break;
+            }
+        }
+    }
+    return pos;
+}
 void move(board_t* board)
 {
     move_t *to_move = calloc(1, sizeof(move_t));
+    to_move->from = calloc(1, sizeof(id_of_board_t));
+    to_move->to = calloc(1, sizeof(id_of_board_t));
     // Get user input
+    user_input(to_move);
+    pos_t* from = lookup(to_move->from, board);
+    pos_t* to = lookup(to_move->to, board);
+    printf("from %d %d\n", from->i, from->j);
+    printf("from %d %d\n", to->i, to->j);
     out_of_bounds(board, to_move);
     valid_move(board, to_move);
     check(board, to_move);
-    
+    free(to);
+    free(from);
+    free(to_move->from);
+    free(to_move->to);
+    free(to_move);
 }
 int main(void)
 {

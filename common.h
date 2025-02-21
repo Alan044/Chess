@@ -6,7 +6,7 @@ typedef struct board board_t;
 typedef struct positions positions_t;
 typedef struct id_of_board id_of_board_t;
 typedef struct move move_t;
-
+typedef struct pos pos_t; ;
 
 struct positions {
     pieces_t* piece;
@@ -32,4 +32,9 @@ struct board {
 struct move {
     id_of_board_t *from;
     id_of_board_t *to;
+};
+
+struct pos{
+    int i;
+    int j;
 };
